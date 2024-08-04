@@ -1,22 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="../styles/signup.css">
-</head>
-<body>
-    
+    <link rel="stylesheet" href="../styles/signup.css" />
+  </head>
+  <body>
     <section id="signup">
-        <h2>Sign Up</h2>
-        <form class="auth-form">
-            <input type="text" placeholder="Enter your name" required>
-            <input type="email" placeholder="Enter your email" required>
-            <input type="password" placeholder="Enter your password" required>
-            <button type="submit" class="btn-primary">Signup</button>
-        </form>
+      <h2>Sign Up</h2>
+      <form id="signup-form" class="auth-form">
+        <input id="name" type="text" placeholder="Enter your name" required />
+        <input id="email" placeholder="Enter your email" required />
+
+        <input
+          type="password"
+          id="password"
+          placeholder="Enter your password"
+          required
+        />
+        <button id="btn" type="submit" class="btn-primary">Signup</button>
+      </form>
     </section>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="module" src="../scripts/signup.js"></script>
-</body>
+  </body>
 </html>
