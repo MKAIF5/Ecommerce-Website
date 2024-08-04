@@ -3,10 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dark Theme E-Commerce</title>
+    <link rel="stylesheet" href="./styles/style.css">
 </head>
 <body>
-    
-    <script src="script.js"></script>
+    <header>
+        <nav>
+            <h1>ShopName</h1>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#signup">Signup</a></li>
+                <li><a href="#login">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h2>Welcome to ShopName</h2>
+            <p>Explore the best products at unbeatable prices</p>
+            <a href="#products" class="btn-primary">Shop Now</a>
+        </div>
+    </section>
+
+    <section id="products">
+        <h2>Our Products</h2>
+        <div class="product-grid">
+            <div class="product-item">
+                <img src="product1.jpg" alt="Product 1">
+                <h3>Product 1</h3>
+                <p>$29.99</p>
+                <a href="#" class="btn-secondary">Add to Cart</a>
+            </div>
+            <div class="product-item">
+                <img src="product2.jpg" alt="Product 2">
+                <h3>Product 2</h3>
+                <p>$39.99</p>
+                <a href="#" class="btn-secondary">Add to Cart</a>
+            </div>
+            <!-- Add more products as needed -->
+        </div>
+    </section>
+
+    <section id="signup">
+        <h2>Signup</h2>
+        <form class="auth-form">
+            <input type="text" placeholder="Enter your name" required>
+            <input type="email" placeholder="Enter your email" required>
+            <input type="password" placeholder="Enter your password" required>
+            <button type="submit" class="btn-primary">Signup</button>
+        </form>
+    </section>
+
+    <section id="login">
+        <h2>Login</h2>
+        <form class="auth-form">
+            <input type="email" placeholder="Enter your email" required>
+            <input type="password" placeholder="Enter your password" required>
+            <button type="submit" class="btn-primary">Login</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 ShopName. All rights reserved.</p>
+    </footer>
 </body>
 </html>
