@@ -1,0 +1,134 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #222;
+    position: absolute;
+    top: 15%;
+    left: 30%;
+    width: 40%;
+    height: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 1s ease-in-out;
+}
+
+h2 {
+    color: white;
+    font-size: 50px;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeInUp 1s 0.5s forwards;
+    font-family: sans-serif;
+}
+
+#login {
+    padding: 50px 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.auth-form {
+    max-width: 500px;
+    padding: 20px;
+    background: #333;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transform: translateY(-50px);
+    opacity: 0;
+    animation: slideInUp 1s 0.5s forwards;
+}
+
+.auth-form input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #555;
+    background: #222;
+    color: #ddd;
+    transition: border-color 0.3s, background-color 0.3s;
+    animation: inputFocus 0.5s ease-in-out;
+}
+
+.auth-form input::placeholder {
+    color: #777;
+}
+
+.auth-form input:focus {
+    border-color: #f39c12;
+    background-color: #333;
+}
+
+.auth-form button {
+    background: #f39c12;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+    animation: buttonPulse 1s infinite;
+}
+
+.auth-form button:hover {
+    background: #e67e22;
+    transform: scale(1.05);
+}
+
+/* Keyframes for animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes inputFocus {
+    from {
+        border-color: #555;
+    }
+    to {
+        border-color: #f39c12;
+    }
+}
+
+@keyframes buttonPulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
