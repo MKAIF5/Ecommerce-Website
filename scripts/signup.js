@@ -8,6 +8,7 @@ const button = document.querySelector("#btn");
 
 form.addEventListener("submit", async (event) => {
     event.preventDefault();
+    button.innerText = "loading..."
     const fullName = fullNameInput.value;
     const email = emailInput.value;
     const password = passwordInput.value;

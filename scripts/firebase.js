@@ -15,8 +15,16 @@ import {
   addDoc,
   serverTimestamp,
   onSnapshot,
-  getDocs
+  getDocs,
+  deleteDoc
 } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+
+import {
+  getStorage,
+  ref,
+  uploadBytes ,
+  getDownloadURL,
+} from "https://www.gstatic.com/firebasejs/10.12.4/firebase-storage.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCcMMtNnqyC9lHtN3PrAQLuSFIMmN9XrQc",
@@ -28,11 +36,12 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-
+// authentication
 const auth = getAuth(app);
+// firestore satabase
 const db = getFirestore(app);
-
-
+// storage
+const storage = getStorage(app);
 export {
   auth,
   getAuth,
@@ -47,5 +56,11 @@ export {
   onSnapshot,
   getDocs,
   db,
-  getFirestore
+  getFirestore,
+  ref,
+  uploadBytes,
+  storage,
+  getDownloadURL,
+  getStorage,
+  deleteDoc
 }

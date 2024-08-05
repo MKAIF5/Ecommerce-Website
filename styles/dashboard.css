@@ -151,7 +151,25 @@ nav ul li a:hover {
     transform: scale(1.05);
 }
 
-#products form input {
+#products form #product-name {
+    width: 20rem;
+    background-color: white;
+    border: 1px solid white;
+    height: 0.5rem;
+    color: black;
+    padding: 1.1rem;
+}
+
+#products form #product-price {
+    width: 20rem;
+    background-color: white;
+    border: 1px solid white;
+    height: 0.5rem;
+    color: black;
+    padding: 1.1rem;
+}
+
+#products form #product-detail {
     width: 20rem;
     background-color: white;
     border: 1px solid white;
@@ -281,6 +299,34 @@ nav ul li a:hover {
     background: #e67e22;
     transform: scale(1.05);
 }
+
+.product-item {
+    position: relative; /* Ensure the button can be positioned absolutely relative to this container */
+    border: 1px solid #ddd; /* Optional: Add a border for better visibility */
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for a better look */
+}
+
+.remove-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ff6b6b; /* Optional: Color for the button */
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    z-index: 10; /* Ensure the button is above other elements */
+}
+
+.remove-btn:hover {
+    background: #ff4757; /* Optional: Darker color on hover */
+}
+
 
 /* Footer */
 footer {

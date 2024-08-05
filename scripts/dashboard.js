@@ -4,13 +4,19 @@ import {
     collection,
     addDoc,
     serverTimestamp,
-    onSnapshot,
     getDocs,
+    deleteDoc,
     auth,
     signOut,
     onAuthStateChanged,
-    db
+    db,
+    ref,
+    uploadBytes,
+    getDownloadURL,
+    getStorage
 } from "./firebase.js";
+
+const storage = getStorage();
 
 // email show and logout work
 const liEmail = document.querySelector("#li-email");
@@ -52,6 +58,7 @@ const form = document.getElementById("form");
 const productName = document.getElementById("product-name");
 const productPrice = document.getElementById("product-price");
 const productDetail = document.getElementById("product-detail");
+const productImg = document.getElementById("product-img");
 const buttonProduct = document.getElementById("btn-1");
 
 const myCollection = collection(db, "products");
@@ -60,15 +67,27 @@ form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     buttonProduct.innerText = "loading...";
-    const myProducts = {
-        productName: productName.value,
-        productPrice: Number(productPrice.value),
-        productImg: null,
-        productDetail: productDetail.value,
-        createdAt: serverTimestamp()
-    };
 
     try {
+        const myFile = productImg.files[0];
+        let imgURL = "";
+
+        if (myFile) {
+            const storageRef = ref(storage, `images/${myFile.name}`);
+            // Upload the file to Firebase Storage
+            const snapshot = await uploadBytes(storageRef, myFile);
+            // Get the download URL
+            imgURL = await getDownloadURL(snapshot.ref);
+        }
+
+        const myProducts = {
+            productName: productName.value,
+            productPrice: Number(productPrice.value),
+            productImg: imgURL,
+            productDetail: productDetail.value,
+            createdAt: serverTimestamp()
+        };
+
         // Add the product to Firestore
         await addDoc(myCollection, myProducts);
 
@@ -83,22 +102,25 @@ form.addEventListener("submit", async (event) => {
 
         querySnapshot.forEach((doc) => {
             const product = doc.data();
+            const productId = doc.id;  // Get the document ID
 
             // Create a new product item
             const productItem = document.createElement("div");
             productItem.classList.add("product-item");
 
             // Format the creation date
-            const formattedDate = product.createdAt
-                ? new Date(product.createdAt.toDate()).toLocaleString()
+            const date = product.createdAt
+                ? dateFns.formatDistance(product.createdAt.toDate(), new Date(), { addSuffix: true })
                 : "";
 
             // Set the content of the new product item
             productItem.innerHTML = `
+            <button class="remove-btn" data-id="${productId}">❌</button>
+                ${product.productImg ? `<img src="${product.productImg}" alt="${product.productName}" style="width: 100px; height: 100px;" />` : ''}
                 <h3>${product.productName}</h3>
                 <p>Price: $${product.productPrice}</p>
                 <p>${product.productDetail}</p>
-                <span>Added ${formattedDate}</span>
+                <span>Added ${date}</span>
             `;
 
             // Append the new product item to the container
@@ -114,8 +136,49 @@ form.addEventListener("submit", async (event) => {
 
     } catch (error) {
         console.error("Error adding document: ", error);
-        if (buttonProduct) {
-            buttonProduct.innerText = "Error";
+
+        Swal.fire({
+            title: "Error",
+            text: error.message,
+            icon: "error",
+            footer: "Something went wrong!"
+        });
+
+        buttonProduct.innerText = "Submit";
+        form.reset();
+    }
+});
+
+// Remove product functionality
+document.getElementById("product-container").addEventListener("click", async (event) => {
+    if (event.target.classList.contains("remove-btn")) {
+        const productId = event.target.getAttribute("data-id");
+
+        try {
+            // Remove the product from Firestore
+            await deleteDoc(doc(db, "products", productId));
+
+            // Optionally, you may also remove the image from Firebase Storage here
+
+            // Remove the product from the DOM
+            event.target.parentElement.remove();
+
+            Swal.fire({
+                title: "Success",
+                text: "Product removed successfully!",
+                icon: "success"
+            });
+
+        } catch (error) {
+            console.error("Error removing document: ", error);
+
+            Swal.fire({
+                title: "Error",
+                text: error.message,
+                icon: "error",
+                footer: "Something went wrong!"
+            });
         }
     }
 });
+
