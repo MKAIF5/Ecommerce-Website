@@ -9,10 +9,10 @@ import {
     auth,
     signOut,
     onAuthStateChanged,
+    db
 } from "./firebase.js";
 
 // email show and logout work
-
 const liEmail = document.querySelector("#li-email");
 const liLogout = document.querySelector("#li-logout");
 const button = document.querySelector("#btn");
@@ -48,7 +48,6 @@ if (liLogout) {
 }
 
 // database add product work
-
 const form = document.getElementById("form");
 const productName = document.getElementById("product-name");
 const productPrice = document.getElementById("product-price");
@@ -60,7 +59,7 @@ const myCollection = collection(db, "products");
 form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-
+    buttonProduct.innerText = "loading...";
     const myProducts = {
         productName: productName.value,
         productPrice: Number(productPrice.value),
@@ -70,31 +69,53 @@ form.addEventListener("submit", async (event) => {
     };
 
     try {
+        // Add the product to Firestore
+        await addDoc(myCollection, myProducts);
 
-        const response = await addDoc(myCollection, myProducts);
-        // console.log(response);
-
-        console.log(querySnapshot);
+        // Retrieve the products from Firestore
         const querySnapshot = await getDocs(myCollection);
 
+        // Get the product container
+        const productContainer = document.getElementById("product-container");
+
+        // Clear previous product data (optional)
+        productContainer.innerHTML = '';
+
         querySnapshot.forEach((doc) => {
-            const product = doc.data()
+            const product = doc.data();
 
-            const valueName = document.getElementById("p-name");
-            const valuePrice = document.getElementById("p-price");
-            const valueDetail = document.getElementById("p-detail");
-            const valueDate = document.getElementById("p-date");
+            // Create a new product item
+            const productItem = document.createElement("div");
+            productItem.classList.add("product-item");
 
-            buttonProduct.innerText = "loading..."
+            // Format the creation date
+            const formattedDate = product.createdAt
+                ? new Date(product.createdAt.toDate()).toLocaleString()
+                : "";
 
-            product.productName.innerHTML = valueName
-            product.createdAt?.toDate().innerHTML += valueDate
-            product.productPrice.innerHTML += valuePrice
-            product.productDetail.innerHTML = valueDetail
+            // Set the content of the new product item
+            productItem.innerHTML = `
+                <h3>${product.productName}</h3>
+                <p>Price: $${product.productPrice}</p>
+                <p>${product.productDetail}</p>
+                <span>Added ${formattedDate}</span>
+            `;
+
+            // Append the new product item to the container
+            productContainer.appendChild(productItem);
         });
 
-    } catch (error) {
-        console.log(error);
-    }
+        form.reset();
 
+        // Update button text
+        if (buttonProduct) {
+            buttonProduct.innerText = "Product added";
+        }
+
+    } catch (error) {
+        console.error("Error adding document: ", error);
+        if (buttonProduct) {
+            buttonProduct.innerText = "Error";
+        }
+    }
 });
