@@ -1,50 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dark Theme E-Commerce</title>
-    <link rel="stylesheet" href="../styles/dashboard.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-Commerce</title>
+    <link rel="stylesheet" href="../styles/dashboard.css" />
+  </head>
+  <body>
     <header>
-        <nav>
-            <h1>KAIF.com</h1>
-            <ul>
-                <li id="li-email"</li>
-                    <li id="li-logout"><button id="btn">Log Out</button></li>
-            </ul>
-        </nav>
+      <nav>
+        <h1>KAIF.com</h1>
+        <ul>
+          <li id="li-email"></li>
+          <li id="li-logout"><button id="btn">Log Out</button></li>
+        </ul>
+      </nav>
     </header>
 
     <section id="home" class="hero">
-        <div class="hero-content">
-            <h2>Welcome to KAIF.com</h2>
-            <p>Explore the best products at unbeatable prices</p>
-            <a href="#products" class="btn-primary">Add Your Product</a>
-        </div>
+      <div class="hero-content">
+        <h2>Welcome to KAIF.com</h2>
+        <p>Explore the best products at unbeatable prices</p>
+        <a href="#products" class="btn-primary">Add Your Product</a>
+      </div>
     </section>
     <section id="products">
-        <h2>Our Products</h2>
-        <div class="product-grid">
-            <div class="product-item">
-                <img src="product1.jpg" alt="Product 1">
-                <h3>Product 1</h3>
-                <p>$29.99</p>
-                <a href="#" class="btn-secondary">Add to Cart</a>
-            </div>
-            <div class="product-item">
-                <img src="product2.jpg" alt="Product 2">
-                <h3>Product 2</h3>
-                <p>$39.99</p>
-                <a href="#" class="btn-secondary">Add to Cart</a>
-            </div>
-            <!-- Add more products as needed -->
+      <h1 class="products-h1">Our Products</h1>
+      <br />
+      <form id="form">
+        <input
+          type="text"
+          placeholder="Enter Your Product Name"
+          name=""
+          id="product-name"
+        />
+        <input
+          type="number"
+          placeholder="Enter Your Product Price"
+          name=""
+          id="product-price"
+        />
+        <input
+          type="text"
+          placeholder="Enter Your Product Detail"
+          name=""
+          id="product-detail"
+        />
+        <button id="btn-1" class="submit">Submit</button>
+      </form>
+      <br /><br />
+      <div class="product-grid">
+        <div class="product-item">
+          <!-- <img src="product1.jpg" alt="Product 1" /> -->
+          <h3 id="p-name"></h3>
+          <span id="p-date"></span>
+          <p id="p-price"></p>
+          <p id="p-detail"></p>
+          <!-- <a href="" class="btn-secondary">Add to Cart</a> -->
         </div>
+        <!-- <div class="product-item">
+          <img src="product2.jpg" alt="Product 2" />
+          <h3>Product 2</h3>
+          <p>$39.99</p>
+          <a href="" class="btn-secondary">Add to Cart</a>
+        </div> -->
+      </div>
     </section>
     <footer>
-        <p>&copy; 2024 KAIF.com All rights reserved.</p>
+      <p>&copy; 2024 KAIF.com All rights reserved.</p>
     </footer>
     <script type="module" src="../scripts/dashboard.js"></script>
-</body>
+  </body>
 </html>
