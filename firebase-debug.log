@@ -1,0 +1,30 @@
+[debug] [2024-08-06T05:15:30.519Z] ----------------------------------------------------------------------
+[debug] [2024-08-06T05:15:30.522Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\USER\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2024-08-06T05:15:30.523Z] CLI Version:   13.14.2
+[debug] [2024-08-06T05:15:30.523Z] Platform:      win32
+[debug] [2024-08-06T05:15:30.523Z] Node Version:  v18.16.0
+[debug] [2024-08-06T05:15:30.525Z] Time:          Tue Aug 06 2024 10:15:30 GMT+0500 (Pakistan Standard Time)
+[debug] [2024-08-06T05:15:30.525Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-08-06T05:15:30.949Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-08-06T05:15:30.951Z] > authorizing via signed-in user (mkaif555123@gmail.com)
+[debug] [2024-08-06T05:15:30.951Z] [iam] checking project ecommerce-website-3fa32 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2024-08-06T05:15:30.956Z] > refreshing access token with scopes: []
+[debug] [2024-08-06T05:15:30.963Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-08-06T05:15:30.963Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-08-06T05:15:31.979Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2024-08-06T05:15:31.980Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-08-06T05:15:32.049Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/ecommerce-website-3fa32:testIamPermissions [none]
+[debug] [2024-08-06T05:15:32.049Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/ecommerce-website-3fa32:testIamPermissions x-goog-quota-user=projects/ecommerce-website-3fa32
+[debug] [2024-08-06T05:15:32.050Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/ecommerce-website-3fa32:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-08-06T05:15:34.146Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/ecommerce-website-3fa32:testIamPermissions 200
+[debug] [2024-08-06T05:15:34.147Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/ecommerce-website-3fa32:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-08-06T05:15:34.152Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/ecommerce-website-3fa32 [none]
+[debug] [2024-08-06T05:15:35.137Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/ecommerce-website-3fa32 200
+[debug] [2024-08-06T05:15:35.138Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/ecommerce-website-3fa32 {"projectId":"ecommerce-website-3fa32","projectNumber":"497975527711","displayName":"Ecommerce website","name":"projects/ecommerce-website-3fa32","resources":{"hostingSite":"ecommerce-website-3fa32","storageBucket":"ecommerce-website-3fa32.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_12197973-ea83-44d3-874c-52bf7d1fb79e"}
+[info] 
+[info] === Deploying to 'ecommerce-website-3fa32'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2024-08-06T05:15:35.183Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/ecommerce-website-3fa32/versions [none]
+[debug] [2024-08-06T05:15:35.183Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/ecommerce-website-3fa32/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}

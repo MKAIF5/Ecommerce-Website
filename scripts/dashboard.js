@@ -63,34 +63,8 @@ const buttonProduct = document.getElementById("btn-1");
 
 const myCollection = collection(db, "products");
 
-form.addEventListener("submit", async (event) => {
-    event.preventDefault();
-
-    buttonProduct.innerText = "loading...";
-
+async function fetchAndDisplayProducts() {
     try {
-        const myFile = productImg.files[0];
-        let imgURL = "";
-
-        if (myFile) {
-            const storageRef = ref(storage, `images/${myFile.name}`);
-            // Upload the file to Firebase Storage
-            const snapshot = await uploadBytes(storageRef, myFile);
-            // Get the download URL
-            imgURL = await getDownloadURL(snapshot.ref);
-        }
-
-        const myProducts = {
-            productName: productName.value,
-            productPrice: Number(productPrice.value),
-            productImg: imgURL,
-            productDetail: productDetail.value,
-            createdAt: serverTimestamp()
-        };
-
-        // Add the product to Firestore
-        await addDoc(myCollection, myProducts);
-
         // Retrieve the products from Firestore
         const querySnapshot = await getDocs(myCollection);
 
@@ -126,6 +100,48 @@ form.addEventListener("submit", async (event) => {
             // Append the new product item to the container
             productContainer.appendChild(productItem);
         });
+    } catch (error) {
+        console.error("Error fetching documents: ", error);
+
+        Swal.fire({
+            title: "Error",
+            text: error.message,
+            icon: "error",
+            footer: "Something went wrong!"
+        });
+    }
+}
+
+form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    buttonProduct.innerText = "loading...";
+
+    try {
+        const myFile = productImg.files[0];
+        let imgURL = "";
+
+        if (myFile) {
+            const storageRef = ref(storage, `images/${myFile.name}`);
+            // Upload the file to Firebase Storage
+            const snapshot = await uploadBytes(storageRef, myFile);
+            // Get the download URL
+            imgURL = await getDownloadURL(snapshot.ref);
+        }
+
+        const myProducts = {
+            productName: productName.value,
+            productPrice: Number(productPrice.value),
+            productImg: imgURL,
+            productDetail: productDetail.value,
+            createdAt: serverTimestamp()
+        };
+
+        // Add the product to Firestore
+        await addDoc(myCollection, myProducts);
+
+        // Fetch and display updated products
+        await fetchAndDisplayProducts();
 
         form.reset();
 
@@ -182,3 +198,5 @@ document.getElementById("product-container").addEventListener("click", async (ev
     }
 });
 
+// Fetch and display products on page load
+window.addEventListener("load", fetchAndDisplayProducts);
