@@ -200,3 +200,5 @@ document.getElementById("product-container").addEventListener("click", async (ev
 
 // Fetch and display products on page load
 window.addEventListener("load", fetchAndDisplayProducts);
+
+// Task Completed
